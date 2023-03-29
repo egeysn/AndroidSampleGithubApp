@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Github App</string>
+    <string name="couldntReachServerError">Couldn\'t reach server. Check your internet connection.</string>
+    <string name="unexpectedError">An unexpected error occurred</string>
+    <string name="homePage_welcomeText">Welcome %s 👋</string>
+    <string name="homePage_sloganText">Let\'s relax and watch a movie!</string>
+    <string name="homePage_searchText">Search</string>
+    <string name="homePage_categoryText">Category</string>
+    <string name="homePage_seeAll">See All</string>
+    <string name="homePage_categoryRomance">Romance</string>
+    <string name="homePage_categoryComedy">Comedy</string>
+    <string name="homePage_categoryHorror">Horror</string>
+    <string name="homePage_categoryDrama">Drama</string>
+    <string name="homePage_usersTitle">Users</string>
+    <string name="movieDetailPage_title">Movie Detail</string>
+    <string name="movieDetailPage_genre">Genre</string>
+    <string name="movieDetailPage_comedy">Comedy</string>
+    <string name="userDetailPage_emptyError">>Couldn\'t find the user.</string>
+    <string name="movieDetailPage_duration">Duration</string>
+    <string name="movieDetailPage_rating">Rating</string>
+    <string name="hourAndMinWithParam">%dh %dm</string>
+    <string name="ratingWithParam">%.2f/10</string>
+    <string name="searchPage_title">User Search</string>
+    <string name="searchPage_searchText">Search</string>
+    <string name="searchPage_noMovieText">Couldn\'t find any movie</string>
+</resources>
