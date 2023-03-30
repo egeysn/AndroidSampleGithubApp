@@ -4,6 +4,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
     id "org.jlleitschuh.gradle.ktlint" version "11.1.0"
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -22,9 +23,11 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "BASE_URL", "\"https://api.github.com/\""
+            buildConfigField "String", "BEARER_TOKEN","\"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\""
         }
         release {
             buildConfigField "String", "BASE_URL", "\"https://api.github.com\""
+            buildConfigField "String", "BEARER_TOKEN","\"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\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -104,6 +107,15 @@ dependencies {
 
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
+
+    // Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.5.3")
+
 
     // Chucker
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"

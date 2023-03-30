@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/steel_grey"
-    tools:context="com.egeysn.githubapp.presentation.movie_detail.UserDetailActivity">
+    tools:context="com.egeysn.githubapp.presentation.user_detail.UserDetailActivity">
 
     <ImageView
         android:id="@+id/ivBack"

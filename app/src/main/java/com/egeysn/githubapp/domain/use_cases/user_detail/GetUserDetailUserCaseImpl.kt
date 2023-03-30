@@ -9,9 +9,9 @@ class GetUserDetailUserCaseImpl @Inject constructor(
     private val repository: GithubRepository,
     private val mapper: UserMapper
 ) : GetUserDetailUserCase {
-    override suspend fun getMovieById(id: Long) =
+    override suspend fun getMovieByUserName(userName: String) =
         performRequest(
             mapper = mapper::fromDtoToDomain,
-            networkCall = { repository.getUser(id) },
+            networkCall = { repository.getUser(userName) },
         )
 }

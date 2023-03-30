@@ -4,7 +4,7 @@ import com.egeysn.githubapp.R
 import com.egeysn.githubapp.common.extension.handleError
 import com.egeysn.githubapp.common.utils.Resource
 import com.egeysn.githubapp.common.utils.UiText
-import com.egeysn.githubapp.data.local.entities.MovieEntity
+import com.egeysn.githubapp.data.local.entities.UserEntity
 import com.egeysn.githubapp.data.services.localStorage.LocalStorageService
 import com.egeysn.githubapp.domain.mappers.UserMapper
 import com.egeysn.githubapp.domain.models.User
@@ -22,13 +22,13 @@ class GetUsersUseCaseImpl @Inject constructor(
     private val mapper: UserMapper
 ) :
     GetUsersUseCase {
-    override suspend fun getPopularMovies(page: Int): Flow<Resource<List<User>>> = flow {
+    override suspend fun getUsers(page: Int): Flow<Resource<List<User>>> = flow {
         try {
             emit(Resource.Loading())
             val currentTime = System.currentTimeMillis()
             val lastUpdateTime = localStorageService.getLastUpdateTime() ?: 0
             if (currentTime - lastUpdateTime < CACHE_EXPIRATION_TIME) {
-                val cachedMovies: List<MovieEntity> = repository.getCachedPopularMovies(page)
+                val cachedMovies: List<UserEntity> = repository.getCachedPopularMovies(page)
                 if (cachedMovies.isNotEmpty()) {
                     emit(Resource.Success(data = cachedMovies.map(mapper::fromEntityToDomain)))
                     return@flow

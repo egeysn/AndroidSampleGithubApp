@@ -10,8 +10,8 @@ interface GithubApiService {
     @GET("users")
     suspend fun getPopularMovies(): UsersResponse
 
-    @GET("movie/{id}")
-    suspend fun getMovie(@Path("id") id: Long): UserDto
+    @GET("users/{username}")
+    suspend fun getUser(@Path("username") userName: String): UserDto
 
     @GET("search/users")
     suspend fun searchUsers(@Query("q") query: String, @Query("per_page") perPage: Int): UsersResponse

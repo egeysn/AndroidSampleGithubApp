@@ -22,9 +22,9 @@ class HomeViewModel @Inject constructor(
         _state.value = HomeViewState.Loading(isLoading)
     }
 
-    fun getMovies(page: Int) {
+    fun getUsers(page: Int) {
         viewModelScope.launch {
-            getMoviesUseCase.getPopularMovies(page).onEach { result ->
+            getMoviesUseCase.getUsers(page).onEach { result ->
                 when (result) {
                     is Resource.Error -> {
                         setLoading(false)

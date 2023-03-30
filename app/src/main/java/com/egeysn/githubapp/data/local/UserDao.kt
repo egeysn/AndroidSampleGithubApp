@@ -4,16 +4,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.egeysn.githubapp.data.local.entities.MovieEntity
+import com.egeysn.githubapp.data.local.entities.UserEntity
 
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovies(movies: List<MovieEntity>)
+    suspend fun insertUsers(movies: List<UserEntity>)
 
-    @Query("SELECT * FROM popularMovies")
-    suspend fun getPopularMovies(): List<MovieEntity>
+    @Query("SELECT * FROM users")
+    suspend fun getUsers(): List<UserEntity>
 
-    @Query("DELETE FROM popularMovies")
-    suspend fun deleteAllMovies()
+    @Query("DELETE FROM users")
+    suspend fun deleteAllUsers()
 }

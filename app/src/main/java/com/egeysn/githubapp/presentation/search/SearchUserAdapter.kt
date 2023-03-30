@@ -58,10 +58,10 @@ class ViewModel(
     }
 
     override fun onClick(v: View?) {
-        listener.onUserClicked(user.id)
+        listener.onUserClicked(user.name)
     }
 }
 
 interface UserItemListener {
-    fun onUserClicked(userId: Int)
+    fun onUserClicked(username: String)
 }

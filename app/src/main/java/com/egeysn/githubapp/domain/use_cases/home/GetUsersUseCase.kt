@@ -5,5 +5,5 @@ import com.egeysn.githubapp.domain.models.User
 import kotlinx.coroutines.flow.Flow
 
 interface GetUsersUseCase {
-    suspend fun getPopularMovies(page: Int): Flow<Resource<List<User>>>
+    suspend fun getUsers(page: Int): Flow<Resource<List<User>>>
 }

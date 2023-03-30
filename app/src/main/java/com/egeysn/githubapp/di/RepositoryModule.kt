@@ -13,7 +13,7 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
     @Binds
     @Singleton
-    abstract fun bindMovieRepository(
+    abstract fun bindGithubRepository(
         movieRepositoryImpl: GithubRepositoryImpl
     ): GithubRepository
 }

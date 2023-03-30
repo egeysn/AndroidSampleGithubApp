@@ -5,5 +5,5 @@ import com.egeysn.githubapp.domain.models.User
 import kotlinx.coroutines.flow.Flow
 
 interface GetUserDetailUserCase {
-    suspend fun getMovieById(id: Long): Flow<Resource<User>>
+    suspend fun getMovieByUserName(username: String): Flow<Resource<User>>
 }

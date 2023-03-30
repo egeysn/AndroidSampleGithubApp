@@ -1,4 +1,4 @@
-package com.egeysn.githubapp.presentation.movie_detail
+package com.egeysn.githubapp.presentation.user_detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,9 +23,9 @@ class UserDetailViewModel @Inject constructor(
         _state.value = MovieDetailViewState.Loading(isLoading)
     }
 
-    fun getMovie(id: Long) {
+    fun getMovie(username: String) {
         viewModelScope.launch {
-            getUserDetailUserCase.getMovieById(id).onEach {
+            getUserDetailUserCase.getMovieByUserName(username).onEach {
                 when (it) {
                     is Resource.Error -> {
                         setLoading(false)
