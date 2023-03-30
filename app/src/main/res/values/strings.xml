@@ -12,12 +12,11 @@
     <string name="homePage_categoryHorror">Horror</string>
     <string name="homePage_categoryDrama">Drama</string>
     <string name="homePage_usersTitle">Users</string>
-    <string name="movieDetailPage_title">Movie Detail</string>
-    <string name="movieDetailPage_genre">Genre</string>
-    <string name="movieDetailPage_comedy">Comedy</string>
+    <string name="userDetailPage_title">User Detail</string>
+    <string name="userDetailPage_location">Location</string>
     <string name="userDetailPage_emptyError">>Couldn\'t find the user.</string>
     <string name="movieDetailPage_duration">Duration</string>
-    <string name="movieDetailPage_rating">Rating</string>
+    <string name="userDetailPage_rating">Rating</string>
     <string name="hourAndMinWithParam">%dh %dm</string>
     <string name="ratingWithParam">%.2f/10</string>
     <string name="searchPage_title">User Search</string>

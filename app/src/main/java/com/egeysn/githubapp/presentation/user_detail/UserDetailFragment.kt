@@ -70,13 +70,10 @@ class UserDetailFragment() :
     }
 
     private fun handleSuccess(data: User) {
-        binding.tvMovieTitle.text = data.name
+        binding.tvUserName.text = data.name
         binding.tvDescription.text = data.name
-        binding.tvGenre.text = data.name
+        binding.tvLocation.text = data.location
         Glide.with(this).load(data.avatar).into(binding.ivMovie)
-        /*     binding.tvDuration.text = data.runtime.runTimeToReadableDuration(this)
-             binding.tvRating.text = getString(R.string.ratingWithParam, data.voteAverage)
-             Glide.with(this).load(data.posterPath.toFullImageLink()).into(binding.ivMovie)*/
     }
 
     private fun handleLoading(loading: Boolean) {

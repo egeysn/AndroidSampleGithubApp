@@ -11,7 +11,10 @@ class UserMapper {
         UserEntity(
             id = id,
             avatar = avatarUrl.safeGet(),
-            name = login.safeGet()
+            name = login.safeGet(),
+            company = company,
+            location = location,
+            bio = bio
         )
     }
 
@@ -19,15 +22,21 @@ class UserMapper {
         User(
             id = id,
             avatar = avatarUrl.safeGet(),
-            name = login.safeGet()
+            name = login.safeGet(),
+            location = location,
+            company = company,
+            bio = bio
         )
     }
 
     fun fromEntityToDomain(userEntity: UserEntity): User = with(userEntity) {
         User(
-            id = userEntity.id,
-            avatar = userEntity.avatar,
-            name = userEntity.name
+            id = id,
+            avatar = avatar,
+            name = name,
+            location = location.safeGet(),
+            company = company.safeGet(),
+            bio = bio
         )
     }
 }

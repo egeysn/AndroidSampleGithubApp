@@ -1,4 +1,4 @@
-# Clean Architecture Movie Application
+# Clean Architecture Github Application
 
 Simple android movie application to practice clean architecture and some popular
 methodologies/technologies.

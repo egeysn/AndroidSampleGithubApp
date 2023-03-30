@@ -38,5 +38,11 @@ data class UserDto(
     @SerializedName("type")
     val type: String?,
     @SerializedName("url")
-    val url: String?
+    val url: String?,
+    @SerializedName("location")
+    val location: String?,
+    @SerializedName("company")
+    val company: String?,
+    @SerializedName("bio")
+    val bio: String?
 )
