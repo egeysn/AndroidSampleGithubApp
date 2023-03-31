@@ -4,8 +4,12 @@ import com.egeysn.githubapp.common.extension.safeGet
 import com.egeysn.githubapp.data.local.entities.UserEntity
 import com.egeysn.githubapp.data.remote.models.UserDto
 import com.egeysn.githubapp.domain.models.User
+import com.egeysn.githubapp.presentation.favoriteManager.FavoriteManager
+import javax.inject.Inject
 
-class UserMapper {
+class UserMapper @Inject constructor() {
+    @Inject
+    lateinit var favoriteManager: FavoriteManager
 
     fun fromDtoToEntity(userDto: UserDto): UserEntity = with(userDto) {
         UserEntity(
@@ -15,7 +19,8 @@ class UserMapper {
             company = company,
             location = location,
             bio = bio,
-            followers = followers
+            followers = followers,
+            // isFav = favoriteManager.favoriteList.value.contains(id)
         )
     }
 
@@ -27,7 +32,8 @@ class UserMapper {
             location = location,
             company = company ?: "-",
             bio = bio,
-            followers = followers
+            followers = followers,
+            // isFav = favoriteManager.favoriteList.value.contains(id)
         )
     }
 
@@ -39,7 +45,8 @@ class UserMapper {
             location = location,
             company = company,
             bio = bio,
-            followers = followers
+            followers = followers,
+            // isFav = favoriteManager.favoriteList.value.contains(id)
         )
     }
 }

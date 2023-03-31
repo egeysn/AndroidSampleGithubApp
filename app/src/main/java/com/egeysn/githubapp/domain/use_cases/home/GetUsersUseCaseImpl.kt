@@ -28,9 +28,9 @@ class GetUsersUseCaseImpl @Inject constructor(
             val currentTime = System.currentTimeMillis()
             val lastUpdateTime = localStorageService.getLastUpdateTime() ?: 0
             if (currentTime - lastUpdateTime < CACHE_EXPIRATION_TIME) {
-                val cachedMovies: List<UserEntity> = repository.getCachedPopularMovies(page)
-                if (cachedMovies.isNotEmpty()) {
-                    emit(Resource.Success(data = cachedMovies.map(mapper::fromEntityToDomain)))
+                val cachedUsers: List<UserEntity> = repository.getCachedUsers(page)
+                if (cachedUsers.isNotEmpty()) {
+                    emit(Resource.Success(data = cachedUsers.map(mapper::fromEntityToDomain)))
                     return@flow
                 }
             }

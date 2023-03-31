@@ -7,6 +7,7 @@ import com.egeysn.githubapp.common.utils.Resource
 import com.egeysn.githubapp.common.utils.UiText
 import com.egeysn.githubapp.domain.models.User
 import com.egeysn.githubapp.domain.use_cases.user_detail.GetUserDetailUserCase
+import com.egeysn.githubapp.presentation.favoriteManager.FavoriteManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
@@ -15,31 +16,48 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class UserDetailViewModel @Inject constructor(
     private val getUserDetailUserCase: GetUserDetailUserCase,
+    private val favoriteManager: FavoriteManager
 ) : ViewModel() {
-    private val _state = MutableStateFlow<MovieDetailViewState>(MovieDetailViewState.Init)
-    fun getViewState(): StateFlow<MovieDetailViewState> = _state.asStateFlow()
+    private val _state = MutableStateFlow<UserDetail>(UserDetail.Init)
+    fun getViewState(): StateFlow<UserDetail> = _state.asStateFlow()
 
-    fun setLoading(isLoading: Boolean) {
-        _state.value = MovieDetailViewState.Loading(isLoading)
+    fun isFavUser(id: Int): Boolean {
+        return favoriteManager.isFavoriteItem(id)
     }
 
-    fun getMovie(username: String) {
+    fun setLoading(isLoading: Boolean) {
+        _state.value = UserDetail.Loading(isLoading)
+    }
+
+    fun saveFavorite(id: Int) {
         viewModelScope.launch {
-            getUserDetailUserCase.getMovieByUserName(username).onEach {
+            favoriteManager.saveFavorite(id)
+        }
+    }
+
+    fun deleteFavorite(id: Int) {
+        viewModelScope.launch {
+            favoriteManager.deleteFavorite(id)
+        }
+    }
+
+    fun getUserDetail(username: String) {
+        viewModelScope.launch {
+            getUserDetailUserCase.getUserByUserName(username).onEach {
                 when (it) {
                     is Resource.Error -> {
                         setLoading(false)
-                        _state.value = MovieDetailViewState.Error(it.message)
+                        _state.value = UserDetail.Error(it.message)
                     }
                     is Resource.Loading -> setLoading(true)
                     is Resource.Success -> {
                         setLoading(false)
                         if (it.data == null) {
-                            _state.value = MovieDetailViewState.Error(
+                            _state.value = UserDetail.Error(
                                 UiText.StringResource(R.string.userDetailPage_emptyError)
                             )
                         } else {
-                            _state.value = MovieDetailViewState.Success(data = it.data)
+                            _state.value = UserDetail.Success(data = it.data)
                         }
                     }
                 }
@@ -47,10 +65,10 @@ class UserDetailViewModel @Inject constructor(
         }
     }
 
-    sealed class MovieDetailViewState {
-        object Init : MovieDetailViewState()
-        data class Loading(val isLoading: Boolean) : MovieDetailViewState()
-        data class Success(val data: User) : MovieDetailViewState()
-        data class Error(val error: UiText) : MovieDetailViewState()
+    sealed class UserDetail {
+        object Init : UserDetail()
+        data class Loading(val isLoading: Boolean) : UserDetail()
+        data class Success(val data: User) : UserDetail()
+        data class Error(val error: UiText) : UserDetail()
     }
 }

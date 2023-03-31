@@ -17,19 +17,19 @@ import javax.inject.Singleton
 abstract class UserCaseModule {
     @Binds
     @Singleton
-    abstract fun bindGetPopularMoviesUseCase(
-        getPopularMoviesUseCaseImpl: GetUsersUseCaseImpl
+    abstract fun bindGetUsersMoviesUseCase(
+        getUsersUseCaseImpl: GetUsersUseCaseImpl
     ): GetUsersUseCase
 
     @Binds
     @Singleton
-    abstract fun bindGetMovieDetailUseCase(
-        getMovieDetailUseCaseImpl: GetUserDetailUserCaseImpl
+    abstract fun bindGetUserDetailUseCase(
+        getUserDetailUseCaseImpl: GetUserDetailUserCaseImpl
     ): GetUserDetailUserCase
 
     @Binds
     @Singleton
-    abstract fun bindSearchMovieUseCase(
+    abstract fun bindSearchUserUseCase(
         searchUserUseCaseImpl: SearchUserUseCaseImpl
     ): SearchUserUseCase
 }

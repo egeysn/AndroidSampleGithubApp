@@ -42,7 +42,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMovieDatabase(app: Application, gson: Gson): UserDatabase {
+    fun provideUserDatabase(app: Application, gson: Gson): UserDatabase {
         return Room.databaseBuilder(app, UserDatabase::class.java, "user_db")
             .fallbackToDestructiveMigration()
             .build()
@@ -54,5 +54,5 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMovieMapper(): UserMapper = UserMapper()
+    fun provideUserMapper(): UserMapper = UserMapper()
 }

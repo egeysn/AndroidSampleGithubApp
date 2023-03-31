@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tvTitle"
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        tools:text="It was a good movie" />
+        tools:text="It was a good user" />
 
     <CheckBox
         android:id="@+id/checkBoxFav"

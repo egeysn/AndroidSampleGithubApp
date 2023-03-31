@@ -213,13 +213,14 @@
                 app:cardBackgroundColor="@color/bombay"
                 app:cardCornerRadius="30dp"
                 app:layout_constraintBottom_toTopOf="@id/guidelineCenter"
-                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintDimensionRatio="1:2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/ivUser"
                     android:layout_width="wrap_content"
+                    android:scaleType="centerCrop"
                     android:layout_height="wrap_content"
                     tools:src="@drawable/sample_movie" />
 

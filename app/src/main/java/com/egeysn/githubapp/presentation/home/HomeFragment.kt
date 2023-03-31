@@ -59,6 +59,13 @@ class HomeFragment() :
     private fun setupObservers() {
         viewModel.getViewState().flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach { state -> handleStateChange(state) }.launchIn(lifecycleScope)
+
+        viewModel.getFavoriteState().flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach { state -> handleFavoriteState(state) }.launchIn(lifecycleScope)
+    }
+
+    private fun handleFavoriteState(state: List<Int>) {
+        adapter.updateItems(state)
     }
 
     private fun handleStateChange(state: HomeViewModel.HomeViewState) {
@@ -71,7 +78,11 @@ class HomeFragment() :
         }
     }
 
-    private fun handleSuccess(list: List<User>) = adapter.setItems(list)
+    private fun handleSuccess(list: List<User>) {
+        val favList = viewModel.getFavoriteState().value
+        list.forEach { it.isFav = favList.contains(it.id) }
+        adapter.setItems(list)
+    }
 
     private fun handleLoading(loading: Boolean) {
         binding.progressBar.isVisible = loading
@@ -80,8 +91,8 @@ class HomeFragment() :
     private fun handleError(error: UiText) = Toast.makeText(requireContext(), error.asString(requireContext()), Toast.LENGTH_SHORT).show()
 
     private fun setUpList() {
-        binding.rvMovies.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        binding.rvMovies.addSimpleVerticalDecoration(
+        binding.rvUsers.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.rvUsers.addSimpleVerticalDecoration(
             16, includeFirstItem = true, includeLastItem = true
         )
         adapter = UserAdapter(object : UserItemListener {
@@ -89,7 +100,11 @@ class HomeFragment() :
                 val directions = HomeFragmentDirections.actionHomeFragmentToUserDetailFragment().setUsername(username)
                 findNavController().navigate(directions)
             }
+
+            override fun onFavoriteClicked(id: Int, isChecked: Boolean) {
+                if (isChecked) viewModel.saveFavorite(id) else viewModel.deleteFavorite(id)
+            }
         })
-        binding.rvMovies.adapter = adapter
+        binding.rvUsers.adapter = adapter
     }
 }

@@ -30,5 +30,9 @@
     <fragment
         android:id="@+id/searchUserFragment"
         android:name="com.egeysn.githubapp.presentation.search.SearchUserFragment"
-        android:label="SearchUserFragment" />
+        android:label="SearchUserFragment" >
+        <action
+            android:id="@+id/action_searchUserFragment_to_userDetailFragment2"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
 </navigation>

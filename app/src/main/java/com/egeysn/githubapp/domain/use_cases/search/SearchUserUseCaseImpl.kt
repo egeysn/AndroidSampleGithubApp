@@ -11,7 +11,7 @@ class SearchUserUseCaseImpl @Inject constructor(
 ) : SearchUserUseCase {
     override suspend fun searchUser(query: String) =
         performRequest(
-            mapper = { response -> response.map(mapper::fromDtoToDomain) },
+            mapper = { response -> response.items?.map(mapper::fromDtoToDomain) },
             networkCall = { repository.searchUser(query, 30) },
         )
 }

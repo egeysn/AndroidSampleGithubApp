@@ -1,6 +1,6 @@
 # Clean Architecture Github Application
 
-Simple android movie application to practice clean architecture and some popular
+Simple android Github application to practice clean architecture and some popular
 methodologies/technologies.
 
 ## Tech Stack ⚙️

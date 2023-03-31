@@ -1,19 +1,20 @@
 package com.egeysn.githubapp.di
 
 import com.egeysn.githubapp.data.repositories.GithubRepositoryImpl
-import com.egeysn.githubapp.domain.repositories.GithubRepository
-import dagger.Binds
+import com.egeysn.githubapp.presentation.favoriteManager.FavoriteManager
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModule {
-    @Binds
+class ManagerModule {
+
+    @Provides
     @Singleton
-    abstract fun bindGithubRepository(
+    fun bindFavoriteManager(
         githubRepositoryImpl: GithubRepositoryImpl
-    ): GithubRepository
+    ): FavoriteManager = FavoriteManager(githubRepositoryImpl)
 }

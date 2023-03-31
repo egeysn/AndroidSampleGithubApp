@@ -7,5 +7,6 @@ data class User(
     val location: String?,
     val company: String?,
     val bio: String?,
-    val followers: Int?
+    val followers: Int?,
+    var isFav: Boolean = false
 )

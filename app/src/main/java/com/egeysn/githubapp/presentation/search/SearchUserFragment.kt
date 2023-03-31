@@ -21,7 +21,6 @@ import com.egeysn.githubapp.common.extension.addSimpleVerticalDecoration
 import com.egeysn.githubapp.common.utils.UiText
 import com.egeysn.githubapp.databinding.FragmentSearchBinding
 import com.egeysn.githubapp.domain.models.User
-import com.egeysn.githubapp.presentation.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -63,6 +62,8 @@ class SearchUserFragment() :
 
     private fun handleSuccess(data: List<User>) {
         binding.viewError.tvError.visibility = View.GONE
+        val favList = viewModel.getFavoriteState().value
+        data.forEach { it.isFav = favList.contains(it.id) }
         adapter.setItems(data)
     }
 
@@ -86,23 +87,27 @@ class SearchUserFragment() :
         }
         binding.etSearch.addTextChangedListener { text ->
             if (text != null && text.length > 1) {
-                viewModel.searchMovie(text.toString())
+                viewModel.searchUser(text.toString())
             }
         }
     }
 
     private fun setUpList() {
-        binding.rvMovies.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        binding.rvMovies.addSimpleVerticalDecoration(
+        binding.rvUsers.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.rvUsers.addSimpleVerticalDecoration(
             16, includeFirstItem = true, includeLastItem = true
         )
         adapter = SearchUserAdapter(object : UserItemListener {
-            override fun onUserClicked(userName: String) {
-                val directions = HomeFragmentDirections.actionHomeFragmentToUserDetailFragment().setUsername(userName)
+            override fun onUserClicked(username: String) {
+                val directions = SearchUserFragmentDirections.actionSearchUserFragmentToUserDetailFragment2().setUsername(username)
                 findNavController().navigate(directions)
             }
+
+            override fun onFavoriteClicked(id: Int, isChecked: Boolean) {
+                if (isChecked) viewModel.saveFavorite(id) else viewModel.deleteFavorite(id)
+            }
         })
-        binding.rvMovies.adapter = adapter
+        binding.rvUsers.adapter = adapter
     }
 
     private fun hideSoftKeyboard() {

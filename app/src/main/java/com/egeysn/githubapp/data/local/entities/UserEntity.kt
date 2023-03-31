@@ -12,4 +12,5 @@ data class UserEntity(
     val company: String?,
     val bio: String?,
     val followers: Int?,
+    val isFav: Boolean = false
 )

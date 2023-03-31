@@ -37,7 +37,7 @@ class UserDetailFragment() :
     private val args: UserDetailFragmentArgs by navArgs()
 
     companion object {
-        private var MOVIE_ID: String = ""
+        private var USER_ID: String = ""
     }
 
     override fun onCreateView(
@@ -46,7 +46,7 @@ class UserDetailFragment() :
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentUserDetailBinding.inflate(inflater, container, false)
-        MOVIE_ID = args.username.safeGet()
+        USER_ID = args.username.safeGet()
         listeners()
         setupObservers()
         init()
@@ -57,17 +57,19 @@ class UserDetailFragment() :
             .onEach { state -> handleStateChange(state) }.launchIn(lifecycleScope)
     }
 
-    private fun handleStateChange(state: UserDetailViewModel.MovieDetailViewState) {
+    private fun handleStateChange(state: UserDetailViewModel.UserDetail) {
         when (state) {
-            is UserDetailViewModel.MovieDetailViewState.Error -> handleError(state.error)
-            UserDetailViewModel.MovieDetailViewState.Init -> UserDetailViewModel.MovieDetailViewState.Init
-            is UserDetailViewModel.MovieDetailViewState.Loading -> handleLoading(state.isLoading)
-            is UserDetailViewModel.MovieDetailViewState.Success -> handleSuccess(state.data)
+            is UserDetailViewModel.UserDetail.Error -> handleError(state.error)
+            UserDetailViewModel.UserDetail.Init -> UserDetailViewModel.UserDetail.Init
+            is UserDetailViewModel.UserDetail.Loading -> handleLoading(state.isLoading)
+            is UserDetailViewModel.UserDetail.Success -> handleSuccess(state.data)
         }
     }
 
     private fun handleSuccess(data: User) {
         binding.tvUserName.text = data.name
+        binding.tvFollowersCount.text = data.followers.safeGet().toString()
+        binding.checkBoxFav.isChecked = viewModel.isFavUser(data.id)
         binding.tvLocation.text = data.location ?: "-"
         data.bio?.let {
             binding.tvDescription.text = data.name
@@ -75,8 +77,10 @@ class UserDetailFragment() :
             binding.tvDescription.text = "Not found"
         }
         Glide.with(this).load(data.avatar)
-            .centerCrop()
             .into(binding.ivUser)
+        binding.checkBoxFav.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) viewModel.saveFavorite(data.id) else viewModel.deleteFavorite(data.id)
+        }
     }
 
     private fun handleLoading(loading: Boolean) {
@@ -85,7 +89,7 @@ class UserDetailFragment() :
 
     private fun handleError(error: UiText) = Toast.makeText(requireContext(), error.asString(requireContext()), Toast.LENGTH_SHORT).show()
 
-    private fun init() = viewModel.getMovie(username = MOVIE_ID)
+    private fun init() = viewModel.getUserDetail(username = USER_ID)
 
     private fun listeners() = binding.ivBack.setOnClickListener {
         findNavController().popBackStack()

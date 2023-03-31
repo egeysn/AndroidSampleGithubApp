@@ -6,6 +6,7 @@ import com.egeysn.githubapp.common.utils.Resource
 import com.egeysn.githubapp.common.utils.UiText
 import com.egeysn.githubapp.domain.models.User
 import com.egeysn.githubapp.domain.use_cases.home.GetUsersUseCase
+import com.egeysn.githubapp.presentation.favoriteManager.FavoriteManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
@@ -13,18 +14,29 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getMoviesUseCase: GetUsersUseCase
+    private val getUsersUseCase: GetUsersUseCase,
+    private val favoriteManager: FavoriteManager
 ) : ViewModel() {
     private val _state = MutableStateFlow<HomeViewState>(HomeViewState.Init)
     fun getViewState(): StateFlow<HomeViewState> = _state.asStateFlow()
+
+    fun getFavoriteState(): StateFlow<List<Int>> = favoriteManager.favoriteList
 
     fun setLoading(isLoading: Boolean) {
         _state.value = HomeViewState.Loading(isLoading)
     }
 
+    fun saveFavorite(id: Int) {
+        favoriteManager.saveFavorite(id)
+    }
+
+    fun deleteFavorite(id: Int) {
+        favoriteManager.deleteFavorite(id)
+    }
+
     fun getUsers(page: Int) {
         viewModelScope.launch {
-            getMoviesUseCase.getUsers(page).onEach { result ->
+            getUsersUseCase.getUsers(page).onEach { result ->
                 when (result) {
                     is Resource.Error -> {
                         setLoading(false)

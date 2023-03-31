@@ -55,7 +55,10 @@ class ViewHolder(
         binding.tvTitle.text = item.name
         Glide.with(itemView.context).load(item.avatar).into(binding.ivUser)
         binding.tvOverview.text = user.bio.safeGet()
-        binding.checkBoxFav.setOnClickListener { }
+        binding.checkBoxFav.isChecked = item.isFav
+        binding.checkBoxFav.setOnCheckedChangeListener { _, isChecked ->
+            listener.onFavoriteClicked(id = user.id, isChecked)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -65,4 +68,6 @@ class ViewHolder(
 
 interface UserItemListener {
     fun onUserClicked(username: String)
+
+    fun onFavoriteClicked(id: Int, isChecked: Boolean)
 }

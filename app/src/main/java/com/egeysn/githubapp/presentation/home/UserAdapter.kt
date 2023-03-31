@@ -22,6 +22,13 @@ class UserAdapter(
         return ViewHolder(binding, listener)
     }
 
+    fun updateItems(favIds: List<Int>) {
+        data.forEach {
+            it.isFav = favIds.contains(it.id)
+        }
+        notifyDataSetChanged()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<User>) {
         this.data.clear()
@@ -50,7 +57,10 @@ class ViewHolder(
         binding.tvTitle.text = item.name
         Glide.with(itemView.context).load(item.avatar).into(binding.ivUser)
         binding.tvOverview.text = item.name
-        binding.checkBoxFav.setOnClickListener {
+        binding.checkBoxFav.isChecked = item.isFav
+        binding.checkBoxFav.setOnCheckedChangeListener { _, isChecked ->
+            // item.isFav = isChecked
+            listener.onFavoriteClicked(id = user.id, isChecked)
         }
     }
 
@@ -59,4 +69,6 @@ class ViewHolder(
 
 interface UserItemListener {
     fun onUserClicked(username: String)
+
+    fun onFavoriteClicked(id: Int, isChecked: Boolean)
 }

@@ -7,6 +7,7 @@ import com.egeysn.githubapp.common.utils.Resource
 import com.egeysn.githubapp.common.utils.UiText
 import com.egeysn.githubapp.domain.models.User
 import com.egeysn.githubapp.domain.use_cases.search.SearchUserUseCase
+import com.egeysn.githubapp.presentation.favoriteManager.FavoriteManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
@@ -15,7 +16,10 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(private val searchUserUseCase: SearchUserUseCase) : ViewModel() {
+class SearchViewModel @Inject constructor(
+    private val searchUserUseCase: SearchUserUseCase,
+    private val favoriteManager: FavoriteManager
+) : ViewModel() {
     private val _state = MutableStateFlow<SearchViewState>(SearchViewState.Init)
     fun getViewState(): StateFlow<SearchViewState> = _state.asStateFlow()
     private var searchJob: Job? = null
@@ -24,7 +28,20 @@ class SearchViewModel @Inject constructor(private val searchUserUseCase: SearchU
         _state.value = SearchViewState.Loading(isLoading)
     }
 
-    fun searchMovie(query: String) {
+    fun getFavoriteState(): StateFlow<List<Int>> = favoriteManager.favoriteList
+    fun saveFavorite(id: Int) {
+        viewModelScope.launch {
+            favoriteManager.saveFavorite(id)
+        }
+    }
+
+    fun deleteFavorite(id: Int) {
+        viewModelScope.launch {
+            favoriteManager.deleteFavorite(id)
+        }
+    }
+
+    fun searchUser(query: String) {
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             delay(500L)
@@ -41,7 +58,7 @@ class SearchViewModel @Inject constructor(private val searchUserUseCase: SearchU
                             _state.value = SearchViewState.Success(it.data)
                         } else {
                             _state.value = SearchViewState.Error(
-                                UiText.StringResource(R.string.searchPage_noMovieText)
+                                UiText.StringResource(R.string.searchPage_noUserText)
                             )
                         }
                     }
