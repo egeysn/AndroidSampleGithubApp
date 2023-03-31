@@ -44,5 +44,7 @@ data class UserDto(
     @SerializedName("company")
     val company: String?,
     @SerializedName("bio")
-    val bio: String?
+    val bio: String?,
+    @SerializedName("followers")
+    val followers: Int?
 )

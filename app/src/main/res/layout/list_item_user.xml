@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingHorizontal="@dimen/horizontal_offset"
     android:layout_height="wrap_content"
     android:foreground="?selectableItemBackground"
+    android:paddingHorizontal="@dimen/horizontal_offset"
     tools:background="@color/steel_grey">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvMovieImage"
-        android:layout_width="50dp"
+        android:id="@+id/cvUserImage"
+        android:layout_width="100dp"
         android:layout_height="0dp"
         app:cardBackgroundColor="@color/bombay"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ivMovie"
+            android:id="@+id/ivUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -36,10 +36,10 @@
         android:layout_marginTop="6dp"
         android:fontFamily="@font/texta_medium"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_14"
+        android:textSize="@dimen/text_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@+id/cvMovieImage"
+        app:layout_constraintStart_toEndOf="@+id/cvUserImage"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Mininons: Despicable me 2" />
 
@@ -50,9 +50,9 @@
         android:layout_marginTop="6dp"
         android:ellipsize="end"
         android:fontFamily="@font/texta_regular"
-        android:maxLines="2"
+        android:maxLines="4"
         android:textColor="@color/white_50"
-        android:textSize="@dimen/text_12"
+        android:textSize="@dimen/text_14"
         app:layout_constraintEnd_toEndOf="@+id/tvTitle"
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
@@ -64,8 +64,6 @@
         android:layout_height="38dp"
         android:button="@drawable/ic_favorite_selector"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

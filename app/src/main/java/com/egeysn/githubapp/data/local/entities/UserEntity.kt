@@ -9,6 +9,7 @@ data class UserEntity(
     val avatar: String,
     val name: String,
     val location: String?,
-    val company:String?,
-    val bio:String?
+    val company: String?,
+    val bio: String?,
+    val followers: Int?,
 )

@@ -6,20 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.egeysn.githubapp.databinding.ListItemSearchMovieBinding
+import com.egeysn.githubapp.common.extension.safeGet
+import com.egeysn.githubapp.databinding.ListItemSearchUserBinding
 import com.egeysn.githubapp.domain.models.User
 
 class SearchUserAdapter(
     private val listener: UserItemListener
-) : RecyclerView.Adapter<ViewModel>() {
+) : RecyclerView.Adapter<ViewHolder>() {
 
     private val data = ArrayList<User>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewModel {
-        val binding = ListItemSearchMovieBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ListItemSearchUserBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return ViewModel(binding, listener)
+        return ViewHolder(binding, listener)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -29,7 +30,7 @@ class SearchUserAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: ViewModel, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) { bind(data[position]) }
     }
 
@@ -38,8 +39,8 @@ class SearchUserAdapter(
     }
 }
 
-class ViewModel(
-    private val binding: ListItemSearchMovieBinding,
+class ViewHolder(
+    private val binding: ListItemSearchUserBinding,
     private val listener: UserItemListener
 ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
@@ -52,8 +53,8 @@ class ViewModel(
     fun bind(item: User) {
         this.user = item
         binding.tvTitle.text = item.name
-        Glide.with(itemView.context).load(item.avatar).into(binding.ivMovie)
-        binding.tvOverview.text = "asd asd"
+        Glide.with(itemView.context).load(item.avatar).into(binding.ivUser)
+        binding.tvOverview.text = user.bio.safeGet()
         binding.checkBoxFav.setOnClickListener { }
     }
 

@@ -14,7 +14,8 @@ class UserMapper {
             name = login.safeGet(),
             company = company,
             location = location,
-            bio = bio
+            bio = bio,
+            followers = followers
         )
     }
 
@@ -24,8 +25,9 @@ class UserMapper {
             avatar = avatarUrl.safeGet(),
             name = login.safeGet(),
             location = location,
-            company = company,
-            bio = bio
+            company = company ?: "-",
+            bio = bio,
+            followers = followers
         )
     }
 
@@ -34,9 +36,10 @@ class UserMapper {
             id = id,
             avatar = avatar,
             name = name,
-            location = location.safeGet(),
-            company = company.safeGet(),
-            bio = bio
+            location = location,
+            company = company,
+            bio = bio,
+            followers = followers
         )
     }
 }

@@ -16,7 +16,7 @@
     <string name="userDetailPage_location">Location</string>
     <string name="userDetailPage_emptyError">>Couldn\'t find the user.</string>
     <string name="movieDetailPage_duration">Duration</string>
-    <string name="userDetailPage_rating">Rating</string>
+    <string name="userDetailPage_followers">Followers</string>
     <string name="hourAndMinWithParam">%dh %dm</string>
     <string name="ratingWithParam">%.2f/10</string>
     <string name="searchPage_title">User Search</string>

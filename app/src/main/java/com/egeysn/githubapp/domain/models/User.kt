@@ -4,7 +4,8 @@ data class User(
     val id: Int,
     val avatar: String,
     val name: String,
-    val location: String? = "",
-    val company: String? = "",
-    val bio: String?
+    val location: String?,
+    val company: String?,
+    val bio: String?,
+    val followers: Int?
 )

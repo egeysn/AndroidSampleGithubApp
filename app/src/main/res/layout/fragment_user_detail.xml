@@ -72,8 +72,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/cvDuration"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/cvMovieImage"
-                app:layout_constraintTop_toTopOf="@+id/cvMovieImage"
+                app:layout_constraintStart_toEndOf="@id/cvUserImage"
+                app:layout_constraintTop_toTopOf="@+id/cvUserImage"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:strokeColor="@color/tuna"
                 app:strokeWidth="1dp">
@@ -151,7 +151,7 @@
                 android:layout_marginTop="20dp"
                 app:cardBackgroundColor="@color/steel_grey"
                 app:cardCornerRadius="12dp"
-                app:layout_constraintBottom_toBottomOf="@id/cvMovieImage"
+                app:layout_constraintBottom_toBottomOf="@id/cvUserImage"
                 app:layout_constraintEnd_toEndOf="@id/cvDuration"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@id/cvDuration"
@@ -175,13 +175,13 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvRatingTitle"
+                        android:id="@+id/tvFollowersCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/texta_regular"
-                        android:text="@string/userDetailPage_rating"
+                        android:text="@string/userDetailPage_followers"
                         android:textColor="@color/french_grey"
                         android:textSize="@dimen/text_14"
                         app:layout_constraintEnd_toEndOf="@+id/ivRating"
@@ -189,7 +189,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/ivRating" />
 
                     <TextView
-                        android:id="@+id/tvRating"
+                        android:id="@+id/tvRepoCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
@@ -197,17 +197,17 @@
                         android:fontFamily="@font/texta_bold"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_14"
-                        app:layout_constraintEnd_toEndOf="@+id/tvRatingTitle"
-                        app:layout_constraintStart_toStartOf="@+id/tvRatingTitle"
-                        app:layout_constraintTop_toBottomOf="@+id/tvRatingTitle"
-                        tools:text="8.7/10" />
+                        app:layout_constraintEnd_toEndOf="@+id/tvFollowersCount"
+                        app:layout_constraintStart_toStartOf="@+id/tvFollowersCount"
+                        app:layout_constraintTop_toBottomOf="@+id/tvFollowersCount"
+                        tools:text="86" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cvMovieImage"
+                android:id="@+id/cvUserImage"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:cardBackgroundColor="@color/bombay"
@@ -218,7 +218,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/ivMovie"
+                    android:id="@+id/ivUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:src="@drawable/sample_movie" />

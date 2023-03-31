@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.egeysn.githubapp.common.extension.safeGet
@@ -18,7 +19,6 @@ import com.egeysn.githubapp.common.utils.UiText
 import com.egeysn.githubapp.data.services.localStorage.LocalStorageService
 import com.egeysn.githubapp.databinding.FragmentUserDetailBinding
 import com.egeysn.githubapp.domain.models.User
-import com.egeysn.githubapp.presentation.home.UserAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
@@ -27,9 +27,6 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class UserDetailFragment() :
     Fragment() {
-
-    private lateinit var adapter: UserAdapter
-    private val page = 1
 
     @Inject
     lateinit var localStorageService: LocalStorageService
@@ -71,9 +68,15 @@ class UserDetailFragment() :
 
     private fun handleSuccess(data: User) {
         binding.tvUserName.text = data.name
-        binding.tvDescription.text = data.name
-        binding.tvLocation.text = data.location
-        Glide.with(this).load(data.avatar).into(binding.ivMovie)
+        binding.tvLocation.text = data.location ?: "-"
+        data.bio?.let {
+            binding.tvDescription.text = data.name
+        } ?: kotlin.run {
+            binding.tvDescription.text = "Not found"
+        }
+        Glide.with(this).load(data.avatar)
+            .centerCrop()
+            .into(binding.ivUser)
     }
 
     private fun handleLoading(loading: Boolean) {
@@ -85,6 +88,6 @@ class UserDetailFragment() :
     private fun init() = viewModel.getMovie(username = MOVIE_ID)
 
     private fun listeners() = binding.ivBack.setOnClickListener {
-        // onBackPressedDispatcher.onBackPressed() }
+        findNavController().popBackStack()
     }
 }

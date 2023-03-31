@@ -6,20 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.egeysn.githubapp.databinding.ListItemMovieBinding
+import com.egeysn.githubapp.databinding.ListItemUserBinding
 import com.egeysn.githubapp.domain.models.User
 
 class UserAdapter(
     private val listener: UserItemListener
-) : RecyclerView.Adapter<ViewModel>() {
+) : RecyclerView.Adapter<ViewHolder>() {
 
     private val data = ArrayList<User>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewModel {
-        val binding = ListItemMovieBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ListItemUserBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return ViewModel(binding, listener)
+        return ViewHolder(binding, listener)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -29,13 +29,13 @@ class UserAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: ViewModel, position: Int) = with(holder) { bind(data[position]) }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder) { bind(data[position]) }
 
     override fun getItemCount(): Int = data.size
 }
 
-class ViewModel(
-    private val binding: ListItemMovieBinding,
+class ViewHolder(
+    private val binding: ListItemUserBinding,
     private val listener: UserItemListener
 ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
@@ -48,7 +48,7 @@ class ViewModel(
     fun bind(item: User) {
         this.user = item
         binding.tvTitle.text = item.name
-        Glide.with(itemView.context).load(item.avatar).into(binding.ivMovie)
+        Glide.with(itemView.context).load(item.avatar).into(binding.ivUser)
         binding.tvOverview.text = item.name
         binding.checkBoxFav.setOnClickListener {
         }
