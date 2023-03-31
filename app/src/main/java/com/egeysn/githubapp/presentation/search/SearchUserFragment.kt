@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.egeysn.githubapp.common.extension.addSimpleVerticalDecoration
+import com.egeysn.githubapp.common.extension.showSoftKeyboard
 import com.egeysn.githubapp.common.utils.UiText
 import com.egeysn.githubapp.databinding.FragmentSearchBinding
 import com.egeysn.githubapp.domain.models.User
@@ -41,6 +42,7 @@ class SearchUserFragment() :
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.etSearch.requestFocus()
+        binding.etSearch.showSoftKeyboard()
         setUpList()
         listeners()
         setupObservers()

@@ -68,6 +68,8 @@
                 android:layout_marginStart="16dp"
                 android:background="@null"
                 android:fontFamily="@font/texta_bold"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:hint="@string/searchPage_searchText"
                 android:imeOptions="actionDone"
                 android:inputType="text"

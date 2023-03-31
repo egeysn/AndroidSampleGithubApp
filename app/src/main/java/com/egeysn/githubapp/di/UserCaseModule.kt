@@ -17,7 +17,7 @@ import javax.inject.Singleton
 abstract class UserCaseModule {
     @Binds
     @Singleton
-    abstract fun bindGetUsersMoviesUseCase(
+    abstract fun bindGetUsersUseCase(
         getUsersUseCaseImpl: GetUsersUseCaseImpl
     ): GetUsersUseCase
 

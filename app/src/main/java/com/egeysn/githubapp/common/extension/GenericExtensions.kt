@@ -1,5 +1,8 @@
 package com.egeysn.githubapp.common.extension
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -21,3 +24,12 @@ fun String?.safeGet(): String {
 
 inline fun <reified T> Gson.fromJson(json: String) =
     fromJson<T>(json, object : TypeToken<T>() {}.type)
+
+fun View.showSoftKeyboard() {
+    post {
+        if (this.requestFocus()) {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+}
